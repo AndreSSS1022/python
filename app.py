@@ -23,14 +23,37 @@ def weather_dashboard():
 
 #Ruta que pinta los resultados
 @app.route('/results')
-def render_resultados
+def render_resultados():
 #Para poder mostrar los resultados, antes debo saber cual es la ciudad que digito en el formulario
-cityname= request.form['cityname']
+    cityname= request.form['cityname']
+
 
 #Es pasarle el valor de la ciudad que el usuario digito al api
 #Pero antes de consumir el api
-api = get_api_key();
 
+#Esta variable esta almacenando el valor del api key que se encuentra en el archivo config.ini
+api = get_api_key(); # type: ignore
+
+#Vamos a conectarnos al api y consumirlo
+data = get_weather_results(cityname, api)
+
+def get_weather_results(cityname, api_key):
+    url= "https://api.openweathermap.org/data/2.5/weather?q={}&appid={}".format(cityname, api_key)
+    
+    r= request.get(url)
+    return r.json
+    
+   
+
+
+
+def get_api_key():
+    #Esta funcion obtiene el valor del api key que se va a utilizar para consumir el servicio web
+
+    #Se lee el archivo que guarda la api key del servicio web
+    config = configparser.ConfigParser()
+    config.read('config.ini')
+    return config ['openweathermap']['api']
 
 
 

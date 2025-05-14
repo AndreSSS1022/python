@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <title>Aplicacion estado del tiempo - Python</title>
+    </head>
+<body>
+    <div>
+        <h2>Weather Flask App</h2>
+    </div>
+    <div class="inputcity">
+        <p>Enter your city name</p>
+    </div>
+    <form action ="{{url_for('render_results')}}" method="POST">
+        <input id="weatherInput" type="text" name="cityname">
+        <input id="weatherSubmit" type="submit" value="Submit">
+    </form>
+</body>
+
+</html>

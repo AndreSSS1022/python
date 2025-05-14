@@ -6,7 +6,7 @@ import configparser
 #Habilita las capacidades de servidor en la aplicacion
 #Es la libreria encargada de gestionar la renderizacion de las vistas 
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request # type: ignore
 
 #El objeto principal de la aplicacion se llama app
 app = Flask(__name__)

@@ -6,7 +6,7 @@ import configparser
 #Habilita las capacidades de servidor en la aplicacion
 #Es la libreria encargada de gestionar la renderizacion de las vistas 
 
-from flask import Flask, render_template, request # type: ignore
+from flask import Flask, render_template, request  # type: ignore
 
 #El objeto principal de la aplicacion se llama app
 app = Flask(__name__)
@@ -22,7 +22,7 @@ def weather_dashboard():
     return render_template ('home.html')
 
 #Ruta que pinta los resultados
-@app.route('/results')
+@app.route('/results', methods=['POST'])
 def render_resultados():
 #Para poder mostrar los resultados, antes debo saber cual es la ciudad que digito en el formulario
     cityname= request.form['cityname']
@@ -38,9 +38,17 @@ def render_resultados():
 #Data contiene el json con la respuestas
 
     data = get_weather_results(cityname, api) 
-    
+
     #Se toma la temperatura del json
-    temp ="{0:.2f}"format (data['main']['temp'])
+    temp ="{0:.2f}".format (data['main']['temp'])
+    #Se toma la sencacion termica
+    feels_like = "{0:.2f}".format (data['main']['feels_like'])
+    #La condicion de temperatura 
+    data['weather']['main']
+    location = data ['name']
+    weather = data ['weather']['main']
+    #Pintar el json en la respuesta 
+    return render_template ('results.html', location=location, temp= temp, feels_like= feels_like, weather= weather)
 
 def get_weather_results(cityname, api_key):
     url= "https://api.openweathermap.org/data/2.5/weather?q={}&appid={}".format(cityname, api_key)

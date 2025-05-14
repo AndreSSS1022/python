@@ -32,10 +32,15 @@ def render_resultados():
 #Pero antes de consumir el api
 
 #Esta variable esta almacenando el valor del api key que se encuentra en el archivo config.ini
-api = get_api_key(); # type: ignore
+    api = get_api_key(); 
 
 #Vamos a conectarnos al api y consumirlo
-data = get_weather_results(cityname, api)
+#Data contiene el json con la respuestas
+
+    data = get_weather_results(cityname, api) 
+    
+    #Se toma la temperatura del json
+    temp ="{0:.2f}"format (data['main']['temp'])
 
 def get_weather_results(cityname, api_key):
     url= "https://api.openweathermap.org/data/2.5/weather?q={}&appid={}".format(cityname, api_key)

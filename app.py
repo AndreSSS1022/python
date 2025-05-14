@@ -22,14 +22,15 @@ def weather_dashboard():
     return render_template ('home.html')
 
 #Ruta que pinta los resultados
-@app.route ('/results')
+@app.route('/results')
 def render_resultados
 #Para poder mostrar los resultados, antes debo saber cual es la ciudad que digito en el formulario
 cityname= request.form['cityname']
 
 #Es pasarle el valor de la ciudad que el usuario digito al api
+#Pero antes de consumir el api
+api = get_api_key();
 
-api=
 
 
 
